@@ -7,7 +7,12 @@ from PIL import Image as PILImage
 import requests
 
 # Create an MCP server
-mcp = FastMCP("RecodeQR", dependencies=["requests", "Pillow"], port=os.environ.get("PORT", 8000), host="0.0.0.0")
+mcp = FastMCP(
+    "RecodeQR",
+    dependencies=["requests", "Pillow"],
+    port=os.environ.get("PORT", 8000),
+    host="0.0.0.0",
+)
 
 API_BASE = "https://recodeqr.com"
 USER_AGENT = "RecodeQR-MCP/1.0"
@@ -16,14 +21,14 @@ USER_AGENT = "RecodeQR-MCP/1.0"
 @mcp.tool()
 def generate_qr_code(content: str) -> Image:
     """Generate a QR code image from the given content."""
-    data = json.dumps({
-        "destination": "text",
-        "format": "png",
-        "dynamic": False,
-        "data": {
-            "text": content
+    data = json.dumps(
+        {
+            "destination": "text",
+            "format": "png",
+            "dynamic": False,
+            "data": {"text": content},
         }
-    })
+    )
     headers = {"content-type": "application/json", "user-agent": USER_AGENT}
     res = requests.post(f"{API_BASE}/api/generate", data=data, headers=headers)
 
