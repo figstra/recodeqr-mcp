@@ -10,7 +10,7 @@ import requests
 API_BASE = "https://recodeqr.com"
 USER_AGENT = "RecodeQR-MCP/1.0"
 HOST = "0.0.0.0"
-PORT = os.environ.get("PORT", 8000)
+PORT = os.environ.get("PORT", 8080)
 
 # Create an MCP server
 mcp = FastMCP(
@@ -19,6 +19,7 @@ mcp = FastMCP(
     host=HOST,
     port=PORT,
     stateless_http=True,
+    json_response=True,
 )
 
 

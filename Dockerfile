@@ -18,4 +18,4 @@ RUN uv sync --no-dev
 # Copy application code
 COPY . .
 
-CMD ["uv", "run", "python", "server.py"]
+CMD ["python", "server.py"]
