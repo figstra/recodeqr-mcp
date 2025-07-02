@@ -1,11 +1,13 @@
 import io
 import json
+import os
+
 from mcp.server.fastmcp import FastMCP, Image
 from PIL import Image as PILImage
 import requests
 
 # Create an MCP server
-mcp = FastMCP("RecodeQR", dependencies=["requests", "Pillow"])
+mcp = FastMCP("RecodeQR", dependencies=["requests", "Pillow"], port=os.environ.get("PORT", 8000))
 
 API_BASE = "https://recodeqr.com"
 USER_AGENT = "RecodeQR-MCP/1.0"
@@ -35,4 +37,4 @@ def generate_qr_code(content: str) -> Image:
 
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run("streamable-http")
