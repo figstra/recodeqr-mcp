@@ -7,7 +7,7 @@ from PIL import Image as PILImage
 import requests
 
 # Create an MCP server
-mcp = FastMCP("RecodeQR", dependencies=["requests", "Pillow"], port=os.environ.get("PORT", 8000))
+mcp = FastMCP("RecodeQR", dependencies=["requests", "Pillow"], port=os.environ.get("PORT", 8000), host="0.0.0.0")
 
 API_BASE = "https://recodeqr.com"
 USER_AGENT = "RecodeQR-MCP/1.0"
