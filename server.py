@@ -6,16 +6,20 @@ from mcp.server.fastmcp import FastMCP, Image
 from PIL import Image as PILImage
 import requests
 
+
+API_BASE = "https://recodeqr.com"
+USER_AGENT = "RecodeQR-MCP/1.0"
+HOST = "0.0.0.0"
+PORT = os.environ.get("PORT", 8000)
+
 # Create an MCP server
 mcp = FastMCP(
     "RecodeQR",
     dependencies=["requests", "Pillow"],
-    port=os.environ.get("PORT", 8000),
-    host="0.0.0.0",
+    host=HOST,
+    port=PORT,
+    stateless_http=True,
 )
-
-API_BASE = "https://recodeqr.com"
-USER_AGENT = "RecodeQR-MCP/1.0"
 
 
 @mcp.tool()
@@ -42,4 +46,4 @@ def generate_qr_code(content: str) -> Image:
 
 
 if __name__ == "__main__":
-    mcp.run("streamable-http")
+    mcp.run(transport="streamable-http")
